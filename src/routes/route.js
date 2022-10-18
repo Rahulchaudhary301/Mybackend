@@ -35,7 +35,7 @@ router.get("/shoes", function(req, res){
 })
 
 // uses query params
-router.get('/candidates', function(req, res){
+   router.get('/candidates', function(req, res){
     console.log('Query paramters for this request are '+JSON.stringify(req.query))
     let gender = req.query.gender
     let state = req.query.state
@@ -102,6 +102,28 @@ router.get("/films/:filmId", function(req, res){
        //if there is no match give an error response
        res.send("The film id doesn't match any movie")
 })
+
+router.get('/rahul/:i', function(req,res){
+    let arr =["RAhul","Bobby","Mayank","Rohit","Mohit","Sohan","Rohan"]
+    let a= req.params.i
+    res.send(arr[a])
+})
+
+router.get('/pintu', function(req,res){
+    let queryy=req.query
+    let brand =queryy.brand
+    let gender=queryy.gender
+    let state=queryy.state
+    let dis=queryy.district
+    if(brand)
+    console.log('State is ='+state)
+    console.log('Gender is ='+gender)
+    console.log('brand is ='+brand)
+    console.log('District is ='+dis)
+    res.send('Result is print on console')
+})
+
+
 
 module.exports = router;
 // adding this comment for no reason
