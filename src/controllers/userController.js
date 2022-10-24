@@ -1,15 +1,23 @@
+const { model } = require("mongoose")
+const userModel = require("../models/userModel")
 const UserModel= require("../models/userModel")
 
-const createUser= async function (req, res) {
-    let data= req.body
-    let savedData= await UserModel.create(data)
-    res.send({msg: savedData})
+//////////////////////////////////////////////////////////Assinment/////////////////////////////////////////////////////////////////////
+
+const creatbookslist= async function(req,res){
+    let books=req.body;
+    let save = await userModel.create(books)
+    res.send({"List" : save})
+
 }
 
-const getUsersData= async function (req, res) {
-    let allUsers= await UserModel.find()
-    res.send({msg: allUsers})
+const getBooklist= async function(req,res){
+    let bookdata= await userModel.find()
+    res.send({"List": bookdata})
 }
 
-module.exports.createUser= createUser
-module.exports.getUsersData= getUsersData
+
+
+module.exports.creatbookslist=creatbookslist
+module.exports.getBooklist=getBooklist
+
