@@ -1,3 +1,6 @@
+const express=require('express')
+const app=express()
+
 
 const mid1= function ( req, res, next) {
     req.falana= "hi there. i am adding something new to the req object"
@@ -20,6 +23,16 @@ const mid4= function ( req, res, next) {
     next()
 }
 
+
+
+//////////////////////////////////////
+
+ const y=   function(req,res,next){
+        console.log("Hiii RAhul i am hare")
+        next()
+    }
+
+module.exports.y=y
 module.exports.mid1= mid1
 module.exports.mid2= mid2
 module.exports.mid3= mid3
