@@ -25,7 +25,17 @@ const userSchema = new mongoose.Schema( {
 
 module.exports = mongoose.model('User', userSchema) //users
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const Schema=new mongoose.Schema({
+    name:String,
+    age:Number,
+    address:String,
+    mobile:Number
+},
+{timestamps:true})
+
+module.exports=mongoose.model('MiddleCreat',Schema)
 
 // String, Number
 // Boolean, Object/json, array

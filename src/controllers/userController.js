@@ -1,3 +1,4 @@
+//const userModel = require("../models/userModel")
 const UserModel= require("../models/userModel")
 
 
@@ -30,8 +31,20 @@ const list=async function(req,res){
     res.send({msg: s})
 }
 
+const createMember=async function(req,res){
+    let data=req.body
+    let save=await UserModel.create(data)
+    res.send({msg:save})
+}
+const allmember=async function(req,res){
+    let data=await UserModel.find()//.select({name:1,_id:0,mobile:1})
+    res.send({msg:data})
+}
 
+
+module.exports.allmember=allmember
 module.exports.list=list
+module.exports.createMember=createMember
 // module.exports.createUser= createUser
 // module.exports.getUsersData= getUsersData
 // module.exports.basicCode= basicCode
