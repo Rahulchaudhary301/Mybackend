@@ -22,4 +22,12 @@ router.get("/dummy2", commonMW.myOtherMiddleware, UserController.dummyTwo)
 
 router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+router.post('/user-document-creat',commonMW.headerValidation,UserController.documentCreat)
+
+router.post('/creat-product', UserController.creatProcuct)
+
+router.post('/creat-order', commonMW.headerValidation, UserController.Ordercreat)
+
+
 module.exports = router;

@@ -1,4 +1,7 @@
 const UserModel= require("../models/userModel")
+const UserDocument=require('../models/UserDocument')
+const UserProduct=require('../models/ProductDocument')
+const OrderDocument=require('../models/OrderDocument')
 
 
 
@@ -44,6 +47,51 @@ const dummyTwo = function (req, res) {
     if (req.wantsJson) res.send({msg: "another example response"})
     else res.send("another example response")
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const documentCreat=async function(req,res){
+    let data=req.body
+    let savedata=await UserDocument.create(data)
+    res.send({msg:savedata})
+
+}
+
+
+
+const creatProcuct=async function(req,res){
+    let data=req.body
+    let savedata=await UserProduct.create(data)
+    res.send({msg: savedata})
+}
+
+const Ordercreat=async function(req,res){
+    let data=req.body
+    let userId=req.body.userId
+    let productId=req.body.productId
+    if(userId=="6362c498df67f7ca52b8dc9d" && productId=="6362d11c3b56c006f4bed39e"){
+        let savedata=await OrderDocument.create(data)
+        res.send({msg: savedata})
+    }
+   else{
+      res.send({msg:"Either userId or productId is wrong and missing"})
+   }
+}
+
+
+
+
+
+
+// const Order=async function(req,res){
+//     let data=req.body
+//     let savedata=await OrderDocument.create(data)
+//     res.send({msg: savedata})
+// }
+
+//module.exports.Order=Order
+module.exports.Ordercreat=Ordercreat
+module.exports.creatProcuct=creatProcuct
+module.exports.documentCreat=documentCreat
+
 
 module.exports.createUser= createUser
 module.exports.getUsersData= getUsersData
