@@ -65,15 +65,47 @@ const creatProcuct=async function(req,res){
 
 const Ordercreat=async function(req,res){
     let data=req.body
-    let userId=req.body.userId
-    let productId=req.body.productId
-    if(userId=="6362c498df67f7ca52b8dc9d" && productId=="6362d11c3b56c006f4bed39e"){
-        let savedata=await OrderDocument.create(data)
-        res.send({msg: savedata})
+    const {userId,productId}=data
+    let user=await UserDocument.findById(userId)
+    
+    if(!userId){
+        return res.send({msg: "user_id is mandatory in the request"})
     }
-   else{
-      res.send({msg:"Either userId or productId is wrong and missing"})
-   }
+     else if(!productId){
+        return res.send({msg: "producr_id is mandatory in the request"})
+     }
+     
+     if(!user){
+       return res.send({msg:"userId is mandatory in request"})
+     }
+
+     let product= await UserProduct.findById(productId)
+     if(!product){
+      return  res.send({msg: "productId is invalid"})
+     }
+
+     let header=req.headers.isfreeappsuser
+     let balance=user.balance
+     let price =product.price
+     let value=0
+
+     if(header=='true'){
+       data.amount=value
+        data.isFreeAppsUser=header
+        let savedata=await OrderDocument.create(data)
+        res.send({msg:savedata})
+
+     }
+     else if(balance>=price){
+        await UserDocument.findOneAndUpdate({_id:userId},{$set:{balance:balance-price}})
+        data.amount=price
+        data.isFreeAppsUser=header
+        let savedata= await OrderDocument.create(data)
+        res.send({msg:savedata})
+     }
+     else{
+        res.send({msg:"insufficient balance"})
+     }
 }
 
 

@@ -41,12 +41,12 @@ const myOtherMiddleware = function(req, res, next){
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
 const headerValidation=function(req,res,next){
-    let isFreeAppsUser=req.headers["isfreeappsuser"]
-    if(isFreeAppsUser=='true'){
-        next()
+    let header=req.headers.isfreeappsuser
+    if(!header){
+        res.send({msg: "the request is missing a mandatory header"})
     }
     else{
-        res.send({msg: "isFreeAppsUser request is missing , this header is mandatory."})
+        next()
     }
 }
 

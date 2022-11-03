@@ -14,20 +14,20 @@ router.post("/createBook", commonMW.myMiddleware,BookController.createBook, func
     res.send("Ending the cycle")
 }  )
 
-router.post("/createUser", commonMW.myMiddleware, UserController.createUser)
+// router.post("/createUser", commonMW.myMiddleware, UserController.createUser)
 
-router.get("/dummy1", commonMW.myOtherMiddleware, UserController.dummyOne)
+// router.get("/dummy1", commonMW.myOtherMiddleware, UserController.dummyOne)
 
-router.get("/dummy2", commonMW.myOtherMiddleware, UserController.dummyTwo)
+// router.get("/dummy2", commonMW.myOtherMiddleware, UserController.dummyTwo)
 
-router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
+// router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.post('/user-document-creat',commonMW.headerValidation,UserController.documentCreat)
 
 router.post('/creat-product', UserController.creatProcuct)
 
-router.post('/creat-order', commonMW.headerValidation, UserController.Ordercreat)
+router.post('/creat-order',commonMW.headerValidation , UserController.Ordercreat)
 
 
 module.exports = router;
