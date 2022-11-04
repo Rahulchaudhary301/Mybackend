@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 const creatModel=require('../models/AuthenticationModel')
+const commidd=require("../middlewares/commonMiddileWare")
 
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
@@ -159,14 +160,7 @@ let token=await jwt.sign({userId:data._id},'Rahul@321')
 
 
 const useridd= async function(req,res){
-  let token=req.headers["x-auth-token"]
-  if(!token){
-    return res.send({Status:false,msg: "'X-Auth-Token' header is must require"})
-  }
-  let decodeToken= await jwt.verify(token,'Rahul@321')
-  if(!decodeToken) {
-    return res.send({status:false, msg:"token is invalid"})
-  }
+
   let data=req.params.userId
   let userDetails=await creatModel.findById(data)
   if(!userDetails){
@@ -177,8 +171,6 @@ const useridd= async function(req,res){
 
 
 const update=async function(req,res){
-  let header=req.headers["x-auth-token"]
-  if(!header) return res.send({status:false, msg:"'X-Auth-Token' header is must require"})
   let url=req.params.userId
   let data=req.body
   let savedData=await creatModel.findByIdAndUpdate({_id:url},{$set:data},{new:true})
@@ -188,14 +180,11 @@ const update=async function(req,res){
 }
 
 const Delete=async function(req,res){
-  let header=req.headers["x-auth-token"]
-  if(!header) return res.send({status:false, msg:"'X-Auth-Token' header is must require"})
   let url=req.params.userId
   let data=req.body
   let savedData=await creatModel.findByIdAndUpdate({_id:url},{$set:data},{new:true})
-  
-  
-  res.send({msg:savedData})
+
+  res.send({msg: savedData})
 
 }
 
