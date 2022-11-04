@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
+const creatModel=require('../models/AuthenticationModel')
 
 /*
   Read all the comments multiple times to understand why we are doing what we are doing in login api and getUserData api
@@ -91,7 +92,135 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
 };
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const CreatUs=async function(req,res){
+  let data =req.body
+  let savedData=await creatModel.create(data)
+  res.send({msg:savedData})
+}
+
+const userloging=async function(req,res){
+  let data=req.body
+  let eamil=req.body.emailId
+  let pass=req.body.password
+  let savedData=await creatModel.findOne({emailId:eamil, password:pass})
+  if(!savedData){
+    return res.send({Status: "UserName and Password is not correct"})
+  }
+let token=await jwt.sign({userId:data._id},'Rahul@321')
+  res.send({Status:true, data:token})
+}
+
+
+const useridd= async function(req,res){
+  let token=req.headers["x-auth-token"]
+  if(!token){
+    return res.send({Status:false,msg: "'X-Auth-Token' header is must require"})
+  }
+  let decodeToken= await jwt.verify(token,'Rahul@321')
+  if(!decodeToken) {
+    return res.send({status:false, msg:"token is invalid"})
+  }
+  let data=req.params.userId
+  let userDetails=await creatModel.findById(data)
+  if(!userDetails){
+   return res.send({status:false, msg:"no such user exist"})
+  }
+  res.send({status:true, data: userDetails})
+}
+
+
+const update=async function(req,res){
+  let header=req.headers["x-auth-token"]
+  if(!header) return res.send({status:false, msg:"'X-Auth-Token' header is must require"})
+  let url=req.params.userId
+  let data=req.body
+  let savedData=await creatModel.findByIdAndUpdate({_id:url},{$set:data},{new:true})
+  
+  res.send({msg:savedData})
+
+}
+
+const Delete=async function(req,res){
+  let header=req.headers["x-auth-token"]
+  if(!header) return res.send({status:false, msg:"'X-Auth-Token' header is must require"})
+  let url=req.params.userId
+  let data=req.body
+  let savedData=await creatModel.findByIdAndUpdate({_id:url},{$set:data},{new:true})
+  
+  
+  res.send({msg:savedData})
+
+}
+
+module.exports.Delete=Delete
+
+
+module.exports.update=update
+
+
+
+
+
+module.exports.useridd=useridd
+
+
+
+
+
+module.exports.userloging=userloging
+
+
+
+
+
+module.exports.CreatUs=CreatUs
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
