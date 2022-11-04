@@ -46,7 +46,13 @@ const dummyOne = function (req, res) {
 const dummyTwo = function (req, res) {
     if (req.wantsJson) res.send({msg: "another example response"})
     else res.send("another example response")
+
+
 }
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const documentCreat=async function(req,res){
     let data=req.body

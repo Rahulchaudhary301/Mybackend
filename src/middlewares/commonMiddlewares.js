@@ -38,7 +38,17 @@ const myOtherMiddleware = function(req, res, next){
         req.wantsJson = false
     }
     next()
+
+
+
+
 }
+
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 const headerValidation=function(req,res,next){
     let header=req.headers.isfreeappsuser
@@ -49,6 +59,13 @@ const headerValidation=function(req,res,next){
         next()
     }
 }
+
+
+
+
+
+
+
 
 module.exports.headerValidation=headerValidation
 module.exports.mid1= mid1

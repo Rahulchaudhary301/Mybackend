@@ -22,6 +22,22 @@ router.post("/createBook", commonMW.myMiddleware,BookController.createBook, func
 
 // router.get("/basicRoute", commonMW.mid1, commonMW.mid2, commonMW.mid3, commonMW.mid4, UserController.basicCode)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 router.post('/user-document-creat',commonMW.headerValidation,UserController.documentCreat)
 
