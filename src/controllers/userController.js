@@ -188,7 +188,6 @@ const userDetals = async function (req, res) {
         let user = await fbModel.findById({ _id: req.params.userId }, { isDeleted: false })
         
         if (user) {
-        
           let updateUser=user.posts
           updateUser.push(req.body.message)
           let updatedmessage= await fbModel.findOneAndUpdate({_id:user._id},{posts:updateUser},{new:true})
